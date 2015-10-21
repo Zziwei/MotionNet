@@ -7,6 +7,9 @@
 
 OriginalGesture *read_file_to_init_original_gesture(char * fileName);
 
+void write_queue_to_file(char * fileName, SqQueue * queue);
+
+void write_list_to_file(char * fileName, DataHeadNode *pHead);
 
 //Write packet data to file.
 void write_pkt_to_file(char * fileName, PktData pktData);

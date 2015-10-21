@@ -34,6 +34,7 @@
 		<Unit filename="DataCalibrator.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="DataCalibrator.h" />
 		<Unit filename="DataNode.c">
 			<Option compilerVar="CC" />
 		</Unit>

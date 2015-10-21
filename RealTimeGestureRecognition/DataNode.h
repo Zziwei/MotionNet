@@ -5,6 +5,12 @@
 #include<stdlib.h>
 #include <stdbool.h>
 
+typedef struct multiParam{
+    char gszPort[20];
+    //int caliDataNum;
+    int magDataNum;
+}Params;
+
 typedef struct packetData {
     double accX;
     double accY;
@@ -20,8 +26,8 @@ typedef struct packetData {
 } PktData;
 
 ///////////////////////////////////// Data Queue ///////////////////////////////////////
-#define MAX_SIZE 1000
-//环形队列：少用一个空间来区别队空与队满
+#define MAX_SIZE 1001
+//circle queue whose length is ( MAX_SIZE - 1 ), use one element space to distinguish empty and full.
 typedef struct {
 	double accXData[MAX_SIZE];
 	double gyroXData[MAX_SIZE];
@@ -98,7 +104,9 @@ void print_list( DataHeadNode *pHead);
 
 void clear_list( DataHeadNode *pHead);
 
-//Get 3D magnetic data array
+void free_list(DataHeadNode *pHead);
+
+//Get 3D magnetic data array from list
 void fillMagDataArray(DataHeadNode* pHead, double magDataX[], double magDataY[], double magDataZ[]);
 
 #endif // DATANODE_H

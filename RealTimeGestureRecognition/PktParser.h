@@ -15,6 +15,6 @@ int toMs(unsigned char, unsigned char, unsigned int numOverflows);
 
 int uCharToInt(unsigned char, unsigned char);
 
-PktData blockingReadOnePacket();
+PktData blockingReadOnePacket(HANDLE hComm);
 
 #endif	//PKTPRSER_H

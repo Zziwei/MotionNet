@@ -1,29 +1,22 @@
 #include "SerialPort.h"
 
-HANDLE hComm;
+//HANDLE hComm;
 //SYSTEMTIME etime;
 
-bool openPort(TCHAR *gszPort) {
+HANDLE openPort(TCHAR *gszPort) {
     printf("try to open the port %s \n", gszPort);
 
-    hComm = CreateFile(gszPort,                                     // pointer to name of the file
-                       GENERIC_READ | GENERIC_WRITE,								// access (read-write) mode
-                       0,                                                          // share mode
-                       0,                                                          // pointer to security attributes
-                       OPEN_EXISTING,												// how to create
-                       0,                                                          // file attributes
-                       0);															// handle to file with attributes to copy
-
-    if (hComm == INVALID_HANDLE_VALUE) {
-        printf("failed to open serial port %s \n", gszPort);
-        return 0;
-    } else {
-        printf("serial port %s opened \n", gszPort);
-        return 1;
-    }
+    HANDLE hComm = CreateFile(gszPort,                                  // pointer to name of the file
+                       GENERIC_READ | GENERIC_WRITE,					// access (read-write) mode
+                       0,                                               // share mode
+                       0,                                               // pointer to security attributes
+                       OPEN_EXISTING,									// how to create
+                       0,                                               // file attributes
+                       0);												// handle to file with attributes to copy
+    return hComm;
 }
 
-bool setupPort() {
+bool setupPort(HANDLE hComm) {
     printf("try to set up the port \n");
 
     DCB dcb;
@@ -55,7 +48,7 @@ bool setupPort() {
     //  }
 //	printf("DCB ready for use\n");
     if (!SetCommState(hComm, &dcb)) {
-        printf("failed to set port state (%d)\n", GetLastError());
+        printf("failed to set port state (%ld)\n", GetLastError());
         return 0;
     } else {
         printf("Port setup complete\n");
@@ -64,10 +57,10 @@ bool setupPort() {
 }
 
 /*
-	Discards all characters from the output or input buffer of a specified communications resource. 
+	Discards all characters from the output or input buffer of a specified communications resource.
 	It can also terminate pending read or write operations on the resource.
 */
-bool purgePort() {
+bool purgePort(HANDLE hComm) {
 	if (PurgeComm(hComm, PURGE_RXCLEAR)) {
 	 	//printf("Port purged\n");
 		return 1;
@@ -78,7 +71,7 @@ bool purgePort() {
 	}
 }
 
-bool closePort() {
+bool closePort(HANDLE hComm) {
     printf("try to close the port \n");
 
     if (CloseHandle(hComm)) {
@@ -90,7 +83,7 @@ bool closePort() {
     }
 }
 
-bool sendSByte(unsigned char byteToWrite) {
+bool sendSByte(unsigned char byteToWrite, HANDLE hComm) {
     DWORD dwWritten;
     if (WriteFile(hComm, &byteToWrite, sizeof(byteToWrite), &dwWritten, 0)) {
         printf("wrote byte %Xh (%c) to serial port\n", byteToWrite, byteToWrite);
@@ -101,10 +94,10 @@ bool sendSByte(unsigned char byteToWrite) {
     }
 }
 
-unsigned char readSByte() {
+unsigned char readSByte(HANDLE hComm) {
     DWORD dwRead;
     unsigned char lpBuf;
-	
+
     ReadFile(hComm,                     // handle of file to read
              &lpBuf,                         // address of buffer that receives data
              sizeof(lpBuf),                  // number of bytes to read

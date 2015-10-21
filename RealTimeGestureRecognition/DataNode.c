@@ -7,6 +7,7 @@ SqQueue* create_empty_queue() {
 		exit(-1);
 	}
 	queue->front = queue->rear = 0;
+	return queue;
 }
 
 void free_queue(SqQueue* queue) {
@@ -57,6 +58,7 @@ bool delete_from_queue(SqQueue * queue) {
 		return false;
 	else {
 		queue->front = (queue->front + 1) % MAX_SIZE;
+		return true;
 	}
 }
 int  get_queue_length(SqQueue* queue) {
@@ -224,7 +226,7 @@ void print_list(DataHeadNode *pHead) {
 }
 
 void print_pktData(PktData packetData) {
-	printf("%5f, %5f, %5f, %5f, %5f, %5f, %4f, %4f, %4f, %ld, %d\n",
+	printf("%5f, %5f, %5f, %5f, %5f, %5f, %4f, %4f, %4f, %ld, %ld\n",
 	       packetData.accX, packetData.accY, packetData.accZ,
 	       packetData.gyroX, packetData.gyroY, packetData.gyroZ,
 	       packetData.magX, packetData.magY, packetData.magZ,
@@ -233,7 +235,6 @@ void print_pktData(PktData packetData) {
 }
 
 PktData get_element_from_head(DataHeadNode *pHead) {
-	int i = 0;
 	DataNode * p = pHead->head;
 	PktData pktData = {0.0};
 	if (p == NULL) {
@@ -244,7 +245,6 @@ PktData get_element_from_head(DataHeadNode *pHead) {
 }
 
 PktData get_element_from_end( DataHeadNode *pHead) {
-	int i = 0;
 	DataNode * p = pHead->tail;
 	PktData pktData = {0.0};
 	if (p == NULL) {
@@ -256,25 +256,25 @@ PktData get_element_from_end( DataHeadNode *pHead) {
 
 void clear_list(DataHeadNode *pHead) {
 	printf("start clearList \n");
+	if(pHead == NULL){
+        printf("head node is NULL\n");
+        return;
+	}
+
 	DataNode *pNext = pHead->head;
 	DataNode *ptr = NULL;
-
-	//printf("1\n");
 
 	if (pNext == NULL) {
 		printf("list is already empty\n");
 		return;
 	}
-	//printf("2\n");
+
 	while (pNext != NULL) {
 		ptr = pNext->next;
-//		printf(" free memory\n");
 		free(pNext);
 		pNext = ptr;
-		//printf("%d...",pHead->length);
 		pHead->length --;
 	}
-	//printf("3\n");
 
 	if(pHead->length == 0)
 		printf("now list is empty\n");
@@ -284,12 +284,16 @@ void clear_list(DataHeadNode *pHead) {
 	pHead->head = NULL;
 	pHead->tail = NULL;
 	pHead->length = 0;
-	//free(pHead);
-	//pHead = NULL;
 	printf("clearList done\n");
 }
 
-//typedef double (*Arr3D)[3];
+void free_list(DataHeadNode *pHead) {
+    clear_list(pHead);
+    if(pHead != NULL)
+        free(pHead);
+    pHead = NULL;
+    printf("free list done\n");
+}
 
 //the headNode stores the length of the list, get array of magdata
 void fillMagDataArray(DataHeadNode* pHead, double magDataX[], double magDataY[], double magDataZ[]) {

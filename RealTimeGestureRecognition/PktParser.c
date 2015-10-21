@@ -25,7 +25,7 @@ int uCharToInt(unsigned char a, unsigned char b) {
 }
 
 //Read one packet from SerialPort
-PktData blockingReadOnePacket() {
+PktData blockingReadOnePacket(HANDLE hComm) {
 	PktData pktData = { 0.0 };
 
 	unsigned char packet[256];
@@ -39,23 +39,23 @@ PktData blockingReadOnePacket() {
 	// find the start of packet
 	while (((pData != DLE) || (cData != SOH))) {
 		pData = cData;
-		cData = readSByte();
+		cData = readSByte(hComm);
 		if ((pData == DLE) && (cData == DLE)) {
 			pData = cData;
-			cData = readSByte();
+			cData = readSByte(hComm);
 		}
 	}
 
 	// start collect data
 	while (((pData != DLE) || (cData != EOT))) {
 		pData = cData;
-		cData = readSByte();
+		cData = readSByte(hComm);
 
 		if (cData != DLE)
 			packet[(dataCount++) % 256] = cData;
 		else {
 			pData = cData;
-			cData = readSByte();
+			cData = readSByte(hComm);
 			if (cData == DLE) {
 				packet[(dataCount++) % 256] = cData;
 			}

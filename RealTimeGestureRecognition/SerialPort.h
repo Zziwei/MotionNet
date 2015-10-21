@@ -12,16 +12,16 @@
 /*
     Definitions for the methods about serial port operations.
 */
-bool openPort(TCHAR *gszPort);
+HANDLE openPort(TCHAR *gszPort);
 
-bool setupPort();
+bool setupPort(HANDLE hComm);
 
-bool purgePort();
+bool purgePort(HANDLE hComm);
 
-bool closePort();
+bool closePort(HANDLE hComm);
 
-bool sendSByte(unsigned char byteToWrite);
+bool sendSByte(unsigned char byteToWrite, HANDLE hComm);
 
-unsigned char readSByte();
+unsigned char readSByte(HANDLE hComm);
 
 #endif  //SERIALPORT_H

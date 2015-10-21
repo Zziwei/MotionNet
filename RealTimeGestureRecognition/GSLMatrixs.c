@@ -128,7 +128,7 @@ gsl_matrix *  transpose(gsl_matrix * m) {
     return result;
 }
 
-gsl_matrix *  select(gsl_matrix * m, int sub_row, int sub_column) {
+gsl_matrix *  selectMatrix(gsl_matrix * m, int sub_row, int sub_column) {
     gsl_matrix * result = createEmptyMatrix(sub_row, sub_column);
     int i, j;
     for(i = 0; i < sub_row; i ++) {

@@ -38,7 +38,7 @@ gsl_matrix * constantMatrix(int row, int column, double val);
 
 gsl_matrix * transpose(gsl_matrix * m);
 
-gsl_matrix * select(gsl_matrix * m, int sub_row, int sub_column);
+gsl_matrix * selectMatrix(gsl_matrix * m, int sub_row, int sub_column);
 
 gsl_matrix * sqrtMatrix(gsl_matrix *  m);
 

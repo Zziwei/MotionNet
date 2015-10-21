@@ -30,7 +30,7 @@ void write_list_to_file(char * fileName, DataHeadNode *pHead) {
 	fprintf(stream, "AccX\t\tAccY\t\tAccZ\t\tGyroX\t\tGyroY\t\tGyroZ\t\tMagX\t\tMagY\t\tMagZ\t\tNumber\tTimeStamp\r\n");
 	while (ptr != NULL) {
 		pktData = ptr->packetData;
-		fprintf(stream, "%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%ld\t%d\r\n", pktData.accX, pktData.accY, pktData.accZ,
+		fprintf(stream, "%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%ld\t%lu\r\n", pktData.accX, pktData.accY, pktData.accZ,
 		        pktData.gyroX, pktData.gyroY, pktData.gyroZ, pktData.magX, pktData.magY, pktData.magZ, pktData.pktNumber, pktData.timeStamp);
 		ptr = ptr->next;
 	}
@@ -41,7 +41,7 @@ void write_list_to_file(char * fileName, DataHeadNode *pHead) {
 void write_pkt_to_file(char * fileName, PktData pktData) {
 	//printf("add to file");
 	FILE *stream = fopen(fileName, "a+");
-	fprintf(stream, "%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d\t%d\r\n", pktData.accX, pktData.accY, pktData.accZ,
+	fprintf(stream, "%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%ld\t%lu\r\n", pktData.accX, pktData.accY, pktData.accZ,
 	        pktData.gyroX, pktData.gyroY, pktData.gyroZ, pktData.magX, pktData.magY, pktData.magZ, pktData.pktNumber, pktData.timeStamp);
 	fclose(stream);
 }
