@@ -12,7 +12,7 @@
 #include "SPRING.h"
 #include <string.h>
 
-#define MAG_CALI_TIME 15 //the time need to collect initial data, in seconds.
+#define MAG_CALI_TIME 5 //the time need to collect initial data, in seconds.
 
 const PktData ZERO_PKT = {0.0, 0.0};
 
@@ -120,24 +120,22 @@ void ThreadFunc(Params* params) {
 
 
             //the models of the four gestures
-            char *gestureModel[DTW_NUM] = {"./gesture_model/point.txt"
-                                           ,"./gesture_model/2.txt"
-                                           ,"./gesture_model/3.txt"
-                                           ,"./gesture_model/slide_over.txt"
-                                           ,"./gesture_model/5.txt"
-                                           ,"./gesture_model/6.txt"
-                                           ,"./gesture_model/0.txt"
-                                          };
+            char *gestureModel[DTW_NUM] = {"./gesture_model/target.txt"
+                ,"./gesture_model/point.txt"
+                ,"./gesture_model/rotate_right.txt"
+                ,"./gesture_model/rotate_left.txt"
+                ,"./gesture_model/slide_over.txt"
+                ,"./activity_model/stand_up.txt"
+                ,"./activity_model/sit_down.txt"
+                ,"./activity_model/walk.txt"};
 
             //the tresholds of four model gestures
-            double threshold[DTW_NUM] = {POINT_THRESHOLD,ROTATE_RIGHT_THRESHOLD,ROTATE_LEFT_THRESHOLD,SLIDE_OVER_THRESHOLD
-                                         ,STAND_UP_THRESHOLD,SIT_DOWN_THRESHOLD,TARGET_THRESHOLD
-                                        };
+            double threshold[DTW_NUM] = {TARGET_THRESHOLD,POINT_THRESHOLD,ROTATE_RIGHT_THRESHOLD,ROTATE_LEFT_THRESHOLD
+                ,SLIDE_OVER_THRESHOLD,STAND_UP_THRESHOLD,SIT_DOWN_THRESHOLD,WALK_THRESHOLD};
 
             //the time limit of four model gestures
-            double timeLimit[DTW_NUM] = {POINT_TIMELIMIT,ROTATE_RIGHT_TIMELIMIT,ROTATE_LEFT_TIMELIMIT,SLIDE_OVER_TIMELIMIT
-                                         ,STAND_UP_TIMELIMIT,SIT_DOWN_TIMELIMIT,TARGET_TIMELIMIT
-                                        };
+            double timeLimit[DTW_NUM] = {TARGET_TIMELIMIT,POINT_TIMELIMIT,ROTATE_RIGHT_TIMELIMIT,ROTATE_LEFT_TIMELIMIT
+                ,SLIDE_OVER_TIMELIMIT,STAND_UP_TIMELIMIT,SIT_DOWN_TIMELIMIT,WALK_TIMELIMIT};
 
             //initialize the four models and their GestureRecognitionProcess
             //the order is :
@@ -180,7 +178,7 @@ void ThreadFunc(Params* params) {
                 grp[gt].ts = ts;
                 grp[gt].times = 0;
                 grp[gt].times = 0;
-                grp[gt].type = gt + 1;
+                grp[gt].type = gt;
                 grp[gt].timeLimit = timeLimit[gt];
             }
 
@@ -202,7 +200,7 @@ void ThreadFunc(Params* params) {
                 int position = add_to_queue(queue, pktData);
 
                 //input the current data into the SPRING
-                if(SPRING(pktData, &grp[6],position, queue) == TARGET_TYPE) {
+                if(SPRING(pktData, &grp[0],position, queue) == TARGET_TYPE) {
                     trueNum++;
                     add_to_list_head(targetHead, pktData);
                 }
@@ -219,7 +217,7 @@ void ThreadFunc(Params* params) {
 
                 if(hasTarget) {
                     int l = 0;
-                    for(l = 0; l <= 3; l++) {
+                    for(l = 1; l <= 4; l++) {
                         SPRING(pktData, &grp[l],position, queue);
                     }
                 }
