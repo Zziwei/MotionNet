@@ -278,7 +278,7 @@ void clearCalibrator() {
 		printf("clear invert matrix\n");
 	}
 
-	printf("\n===========================  Clear Calibrator OK =======================\n");
+	printf("\n=============================  Clear Calibrator OK =======================\n");
 }
 
 
