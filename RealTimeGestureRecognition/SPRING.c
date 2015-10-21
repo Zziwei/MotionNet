@@ -149,8 +149,6 @@ int SPRING(PktData xt, GRProcess *grProcess, int position, SqQueue* queue)
                                   *dmin,*ts,*te,position,*timee - *times);is_gesture = SIT_DOWN_TYPE;break;
                     case TARGET_TYPE:/*printf("\n\n!!!!!!!!\nsuccess!\ntarget!!!\ndmin=%f\nts=%d\nte=%d\nt=%d\ntime span=%d\n!!!!!!!!\n\n",
                                   *dmin,*ts,*te,position,*timee - *times);*/is_gesture = TARGET_TYPE;break;
-                    case WALK_TYPE:printf("\n\n!!!!!!!!\nsuccess!\nwalk!!!\ndmin=%f\nts=%d\nte=%d\nt=%d\ntime span=%d\n!!!!!!!!\n\n",
-                                  *dmin,*ts,*te,position,*timee - *times);is_gesture = WALK_TYPE;break;
 
                 }
 
