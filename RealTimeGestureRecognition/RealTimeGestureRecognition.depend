@@ -1,0 +1,79 @@
+# depslib dependency file v1.0
+1445010258 source:c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\datacalibrator.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<float.h>
+	"GSLMatrixs.h"
+
+1444138458 c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\gslmatrixs.h
+	<stdio.h>
+	<math.h>
+	<gsl/gsl_matrix.h>
+	<gsl/gsl_linalg.h>
+	<gsl/gsl_blas.h>
+	<gsl/gsl_eigen.h>
+
+1445225549 source:c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\datanode.c
+	"DataNode.h"
+
+1445190129 c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\datanode.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
+1445114483 source:c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\fileutil.c
+	"FileUtil.h"
+
+1445114457 c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\fileutil.h
+	<stdio.h>
+	"DataNode.h"
+	"SPRING.h"
+
+1445294013 c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\spring.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<math.h>
+	<float.h>
+	"DataNode.h"
+
+1444410446 source:c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\gslmatrixs.c
+	"GSLMatrixs.h"
+
+1445293871 source:c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\main.c
+	<stdio.h>
+	<stdlib.h>
+	"PktParser.h"
+	"SerialPort.h"
+	"DataNode.h"
+	"FileUtil.h"
+	"SPRING.h"
+	<string.h>
+
+1444233577 c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\pktparser.h
+	<Windows.h>
+	"SerialPort.h"
+	"DataNode.h"
+
+1444138469 c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\serialport.h
+	<stdio.h>
+	<stdbool.h>
+	<Windows.h>
+	<tchar.h>
+
+1444849416 source:c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\pktparser.c
+	"PktParser.h"
+
+1445090136 source:c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\serialport.c
+	"SerialPort.h"
+
+1445292616 source:c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\spring.c
+	"SPRING.h"
+
+1445205499 source:c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\recognition.c
+	"recognition.h"
+
+1445205489 c:\users\weizi\desktop\motionnetprojectc\realtimegesturerecognition\recognition.h
+	"SPRING.h"
+
